@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h2>Dashboard</h2>
+    <p>Selamat datang di sistem manajemen parkir</p>
+</header>
+
+<div class="stats-grid">
+    <div class="card">
+        <div class="card-info">
+            <h3>Total Pendapatan</h3>
+            <h1 class="green">Rp {{ "{:,.0f}".format(total_pendapatan).replace(',', '.') }}</h1>
+        </div>
+        <div class="card-icon" style="color: var(--success);">
+            <i class='bx bx-wallet'></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-info">
+        <h3>Kendaraan Aktif</h3>
+        <h1 class="blue">{{ jml_aktif }}</h1>
+        
+        <small style="color: #64748b; font-size: 0.8rem;">
+            {{ jml_mobil }} Mobil • {{ jml_motor }} Motor
+        </small>
+        
+    </div>
+    <div class="card-icon" style="color: var(--accent);">
+        <i class='bx bxs-car'></i>
+    </div>
+    </div>
+
+    <div class="card">
+        <div class="card-info">
+            <h3>Total Member</h3>
+            <h1 class="blue">{{ jml_member }}</h1>
+        </div>
+        <div class="card-icon" style="color: var(--accent);">
+            <i class='bx bxs-group'></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-info">
+            <h3>Total Transaksi</h3>
+            <h1 class="orange">{{jml_transaksi}}</h1>
+        </div>
+        <div class="card-icon" style="color: #f59e0b;">
+            <i class='bx bx-line-chart'></i>
+        </div>
+    </div>
+</div>
+
+<div class="parking-area">
+    <div class="parking-header">
+        <i class='bx bxs-car'></i> Kendaraan Sedang Parkir
+    </div>
+
+    {% if tiket_aktif %}
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>NO. RESI</th>
+                        <th>KENDARAAN</th>
+                        <th>JENIS</th>
+                        <th>JAM MASUK</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resi, item in tiket_aktif.items() %}
+                    <tr>
+                        <td class="resi-font">{{ resi }}</td>
+                        <td class="plat-nomor">{{ item.no_kendaraan }}</td>
+                        <td>
+                            {% if item.jenis_kendaraan == 'Motor' %}
+                                <span class="jenis-badge motor">
+                                    <i class='bx bx-cycling'></i> Motor
+                                </span>
+                            {% else %}
+                                <span class="jenis-badge mobil">
+                                    <i class='bx bxs-car'></i> Mobil
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.waktu_masuk_str }}</td>
+                        <td>
+                            {% if item.is_member %}
+                                <span class="status-badge member">Member</span>
+                            {% else %}
+                                <span class="status-badge reguler">Reguler</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <i class='bx bxs-car-garage'></i>
+            <p>Tidak ada kendaraan yang sedang parkir</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

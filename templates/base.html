@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkEase Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <i class='bx bxs-car-garage'></i>
+            <div>
+                ParkEase
+                <span>Management System</span>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/" class="{{ 'active' if request.path == '/' else '' }}">
+                <i class='bx bxs-dashboard'></i> Dashboard
+            </a></li>
+            <li><a href="/masuk" class="{{ 'active' if request.path == '/masuk' else '' }}">
+                <i class='bx bx-log-in-circle'></i> Kendaraan Masuk
+            </a></li>
+            <li><a href="/keluar" class="{{ 'active' if request.path == '/keluar' else '' }}">
+                <i class='bx bx-log-out-circle'></i> Kendaraan Keluar
+            </a></li>
+            <li><a href="/member" class="{{ 'active' if request.path == '/member' else '' }}">
+                <i class='bx bxs-user-detail'></i> Kelola Member
+            </a></li>
+            <li><a href="/riwayat" class="{{ 'active' if request.path == '/riwayat' else '' }}">
+                <i class='bx bx-history'></i> Riwayat Transaksi
+            </a></li>
+        </ul>
+
+        <div class="tarif-info">
+            <h4 sy>Tarif Parkir</h4>
+            <div class="tarif-item">Motor: <span>Rp 3.000/jam</span></div>
+            <div class="tarif-item">Mobil: <span>Rp 5.000/jam</span></div>
+            <div class="tarif-item">Member: <span>Rp 5.000/24jam</span></div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

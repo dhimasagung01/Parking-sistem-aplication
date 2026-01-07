@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3>Data Kendaraan Aktif</h3>
+<table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>No Resi</th>
+            <th>Plat Nomor</th>
+            <th>Jenis</th>
+            <th>Jam Masuk</th>
+            <th>Status Member</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for resi, data in tiket_aktif.items() %}
+        <tr>
+            <td>{{ resi }}</td>
+            <td>{{ data.no_kendaraan }}</td>
+            <td>{{ data.jenis_kendaraan }}</td>
+            <td>{{ data.waktu_masuk_str }}</td>
+            <td>
+                {% if data.is_member %}
+                    <span class="badge bg-success">Member</span>
+                {% else %}
+                    <span class="badge bg-secondary">Umum</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" class="text-center">Tidak ada kendaraan parkir.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

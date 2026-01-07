@@ -1,0 +1,79 @@
+{
+    "tiket_aktif": {
+        "P-MT22.40-D 1222 SSS": {
+            "no_kendaraan": "D 1222 SSS",
+            "jenis_kendaraan": "Motor",
+            "jam_masuk": 22,
+            "menit_masuk": 40,
+            "total_masuk_menit": 1360,
+            "tarif_per_jam": 3000
+        },
+        "P-MT10.37-S 1111 PPP": {
+            "no_kendaraan": "S 1111 PPP",
+            "jenis_kendaraan": "Motor",
+            "waktu_masuk_str": "10:37",
+            "jam_masuk": 10,
+            "menit_masuk": 37,
+            "total_masuk_menit": 637,
+            "tarif_per_jam": 3000,
+            "is_member": false
+        },
+        "P-MB10.53-S 1222 XXX": {
+            "no_kendaraan": "S 1222 XXX",
+            "jenis_kendaraan": "Mobil",
+            "waktu_masuk_str": "10:53",
+            "total_masuk_menit": 653,
+            "tarif_per_jam": 5000,
+            "is_member": false
+        }
+    },
+    "riwayat_transaksi": [
+        {
+            "no_resi": "P-MB2246-D 1222 SSS",
+            "no_kendaraan": "D 1222 SSS",
+            "jenis": "Mobil",
+            "waktu_masuk": "22:46",
+            "waktu_keluar": "22:46",
+            "durasi": "1 Jam",
+            "total_bayar": 5000,
+            "is_member": false
+        },
+        {
+            "no_resi": "P-MB2245-D 1222 SSS",
+            "no_kendaraan": "D 1222 SSS",
+            "jenis": "Mobil",
+            "waktu_masuk": "22:45",
+            "waktu_keluar": "22:46",
+            "durasi": "1 Jam",
+            "total_bayar": 5000,
+            "is_member": false
+        },
+        {
+            "no_resi": "P-MB2247-D 1222 SSS",
+            "no_kendaraan": "D 1222 SSS",
+            "jenis": "Mobil",
+            "waktu_masuk": "22:47",
+            "waktu_keluar": "22:48",
+            "durasi": "1 Jam",
+            "total_bayar": 5000,
+            "is_member": true
+        },
+        {
+            "no_resi": "P-MT2251-D 1222 SSS",
+            "no_kendaraan": "D 1222 SSS",
+            "jenis": "Motor",
+            "waktu_masuk": "22:51",
+            "waktu_keluar": "22:55",
+            "durasi": "1 Jam",
+            "total_bayar": 3000,
+            "is_member": false
+        }
+    ],
+    "member": {
+        "085524591798": {
+            "nama": "dhimas",
+            "tanggal_daftar": "2026-01-06",
+            "jumlah_kunjungan": 1
+        }
+    }
+}
