@@ -1,102 +1,141 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="header-section">
-    <h2><i class='bx bx-log-in-circle'></i> Kendaraan Masuk</h2>
-    <p>Input data kendaraan yang masuk parkir</p>
+  <h2><i class="bx bx-log-in-circle"></i> Kendaraan Masuk</h2>
+  <p>Input data kendaraan yang masuk parkir</p>
 </div>
 
 <div class="entry-grid">
-    <div class="form-card">
-        <form method="POST">
-            <div class="form-group">
-                <label>Nomor Kendaraan</label>
-                <input type="text" name="no_kendaraan" class="custom-input" placeholder="B 1234 ABC" required autocomplete="off">
+  <div class="form-card">
+    <form method="POST">
+      <div class="form-group">
+        <label>Nomor Kendaraan</label>
+        <input
+          type="text"
+          name="no_kendaraan"
+          class="custom-input"
+          placeholder="B 1234 ABC"
+          required
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Jenis Kendaraan</label>
+        <div class="vehicle-selector">
+          <label class="vehicle-option">
+            <input type="radio" name="jenis_kendaraan" value="2" required />
+            <div class="vehicle-card">
+              <i class="bx bx-cycling" style="color: #f59e0b"></i>
+              <span>Motor</span>
+              <small>Rp 3.000/jam</small>
             </div>
+          </label>
 
-            <div class="form-group">
-                <label>Jenis Kendaraan</label>
-                <div class="vehicle-selector">
-                    <label class="vehicle-option">
-                        <input type="radio" name="jenis_kendaraan" value="2" required>
-                        <div class="vehicle-card">
-                            <i class='bx bx-cycling' style="color: #f59e0b;"></i>
-                            <span>Motor</span>
-                            <small>Rp 3.000/jam</small>
-                        </div>
-                    </label>
-
-                    <label class="vehicle-option">
-                        <input type="radio" name="jenis_kendaraan" value="1" required>
-                        <div class="vehicle-card">
-                            <i class='bx bxs-car' style="color: var(--accent);"></i>
-                            <span>Mobil</span>
-                            <small>Rp 5.000/jam</small>
-                        </div>
-                    </label>
-                </div>
+          <label class="vehicle-option">
+            <input type="radio" name="jenis_kendaraan" value="1" required />
+            <div class="vehicle-card">
+              <i class="bx bxs-car" style="color: var(--accent)"></i>
+              <span>Mobil</span>
+              <small>Rp 5.000/jam</small>
             </div>
+          </label>
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label><i class='bx bx-time-five'></i> Jam Masuk</label>
-                <div class="time-inputs">
-                    <input type="number" name="jam" class="custom-input" placeholder="Jam" min="0" max="23" value="{{ jam_sekarang }}" required>
-                    <span>:</span>
-                    <input type="number" name="menit" class="custom-input" placeholder="Menit" min="0" max="59" value="{{ menit_sekarang }}" required>
-                </div>
-            </div>
+      <div class="form-group">
+        <label>Tanggal</label>
+        <input
+          type="date"
+          name="tanggal"
+          class="custom-input"
+          required
+          autocomplete="off"
+        />
+      </div>
 
-            <div class="form-group">
-                <label><i class='bx bx-phone'></i> No. Telepon Member (Opsional)</label>
-                <input type="text" name="telp_member" class="custom-input" placeholder="08xxxxxxxxxx">
-                <small style="color: #64748b; margin-top: 5px; display: block;">Member mendapat tarif flat Rp 5.000 (max 24 jam)</small>
-            </div>
+      <div class="form-group">
+        <label><i class="bx bx-time-five"></i> Jam Masuk</label>
+        <div class="time-inputs">
+          <input
+            type="number"
+            name="jam"
+            class="custom-input"
+            placeholder="Jam"
+            min="0"
+            max="23"
+            value="{{ jam_sekarang }}"
+            required
+          />
+          <span>:</span>
+          <input
+            type="number"
+            name="menit"
+            class="custom-input"
+            placeholder="Menit"
+            min="0"
+            max="59"
+            value="{{ menit_sekarang }}"
+            required
+          />
+        </div>
+      </div>
 
-            <button type="submit" class="btn-submit">
-                <i class='bx bx-log-in-circle'></i> Proses Masuk
-            </button>
-        </form>
+      <div class="form-group">
+        <label><i class="bx bx-phone"></i> No. Telepon Member (Opsional)</label>
+        <input
+          type="text"
+          name="telp_member"
+          class="custom-input"
+          placeholder="08xxxxxxxxxx"
+        />
+        <small style="color: #64748b; margin-top: 5px; display: block"
+          >Member mendapat tarif flat Rp 5.000 (max 24 jam)</small
+        >
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <i class="bx bx-log-in-circle"></i> Proses Masuk
+      </button>
+    </form>
+  </div>
+
+  <div class="result-card">
+    {% if new_resi %}
+    <div class="success-state">
+      <div class="icon-circle">
+        <i class="bx bx-check"></i>
+      </div>
+      <h3 class="success-title">Kendaraan Berhasil Masuk!</h3>
+      <p>Simpan nomor resi ini untuk proses keluar</p>
+
+      <div class="resi-box">
+        <small>NOMOR RESI</small>
+        <h2>{{ new_resi }}</h2>
+      </div>
     </div>
-
-    <div class="result-card">
-        {% if new_resi %}
-            <div class="success-state">
-                <div class="icon-circle">
-                    <i class='bx bx-check'></i>
-                </div>
-                <h3 class="success-title">Kendaraan Berhasil Masuk!</h3>
-                <p>Simpan nomor resi ini untuk proses keluar</p>
-
-                <div class="resi-box">
-                    <small>NOMOR RESI</small>
-                    <h2>{{ new_resi }}</h2>
-                </div>
-            </div>
-        {% else %}
-            <div class="empty-state-card">
-                <i class='bx bxs-parking'></i>
-                <p>Silakan input data di samping untuk mencetak tiket.</p>
-            </div>
-        {% endif %}
+    {% else %}
+    <div class="empty-state-card">
+      <i class="bx bxs-parking"></i>
+      <p>Silakan input data di samping untuk mencetak tiket.</p>
     </div>
-
+    {% endif %}
+  </div>
 </div>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <div class="toast-container">
-            {% for category, message in messages %}
-                <div class="toast show">
-                    <div class="toast-header">
-                        <strong class="me-auto">Berhasil</strong>
-                    </div>
-                    <div class="toast-body">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endwith %}
-
-{% endblock %}
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+%}
+<div class="toast-container">
+  {% for category, message in messages %}
+  <div class="toast show">
+    <div class="toast-header">
+      {% if category == 'success' %}
+      <strong class="me-auto">Berhasil</strong>
+      {% else %}
+      <strong class="me-auto">Gagal</strong>
+      {% endif %}
+    </div>
+    <div class="toast-body">{{ message }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %} {% endblock %}

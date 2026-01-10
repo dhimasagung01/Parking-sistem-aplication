@@ -1,0 +1,182 @@
+{% extends "base.html" %} {% block content %}
+<div class="header-section">
+  <h2><i class="bx bx-log-out-circle"></i> Kendaraan Keluar</h2>
+  <p>Input data kendaraan yang keluar parkir</p>
+</div>
+
+<div class="entry-grid">
+  <div class="form-card">
+    <form method="POST">
+      <input type="text" name="is_confirm" value="0" hidden />
+      <div class="form-group">
+        <label>Pilih Nomor Resi</label>
+        <select
+          name="no_resi"
+          class="custom-input"
+          placeholder="Pilih resi kendaraan"
+          required
+        >
+          {% for tiket in tiket_aktif %}
+          <option value="{{ tiket['no_resi'] }}">
+            {{ tiket['no_resi'] }} | {{ tiket['no_kendaraan'] }} | {{
+            tiket['jenis_kendaraan'] }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tanggal</label>
+        <input
+          type="date"
+          name="tanggal"
+          class="custom-input"
+          required
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><i class="bx bx-time-five"></i> Jam Keluar</label>
+        <div class="time-inputs">
+          <input
+            type="number"
+            name="jam"
+            class="custom-input"
+            placeholder="Jam"
+            min="0"
+            max="23"
+            value="{{ jam_sekarang }}"
+            required
+          />
+          <span>:</span>
+          <input
+            type="number"
+            name="menit"
+            class="custom-input"
+            placeholder="Menit"
+            min="0"
+            max="59"
+            value="{{ menit_sekarang }}"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <i class="bx bx-log-in-circle"></i> Hitung Biaya
+      </button>
+    </form>
+  </div>
+
+  <div class="result-card">
+    {% if currentTicket and isConfirmed == '0' %}
+    <div class="payment-card">
+      <h3 class="payment-card-header">
+        <i class="bx bx-check"></i>
+        <p>Detail Pembayaran</p>
+      </h3>
+
+      <div class="payment-card-body">
+        <div class="payment-card-row">
+          <span>No. Resi</span>
+          <strong>{{ currentTicket['no_resi'] }}</strong>
+        </div>
+        <div class="payment-card-row">
+          <span>Kendaraan</span>
+          <strong>{{ currentTicket['no_kendaraan'] }}</strong>
+        </div>
+        <div class="payment-card-row">
+          <span>Jenis</span>
+          <strong>{{ currentTicket['jenis_kendaraan'] }}</strong>
+        </div>
+        <div class="payment-card-row">
+          <span>Jam Masuk</span>
+          <strong>{{ currentTicket['waktu_masuk_str'] }}</strong>
+        </div>
+        <div class="payment-card-row">
+          <span>Jam Keluar</span>
+          <strong>{{ currentJam }}:{{ currentMenit }}</strong>
+        </div>
+        <div class="payment-card-row">
+          <span>Durasi</span>
+          <strong>{{ totalDurasi }} Jam</strong>
+        </div>
+        <div class="payment-card-row">
+          <span>Status</span>
+          {% if currentTicket['is_member'] %}
+          <strong class="payment-card-status">Member</strong>
+          {% else %}
+          <strong class="payment-card-status">Reguler</strong>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="payment-card-footer">
+        <span>Total Bayar</span>
+        <span class="payment-card-price">Rp {{ totalBiaya }}</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <form method="POST">
+        <input type="text" name="is_confirm" value="1" hidden />
+        <input
+          type="text"
+          name="no_resi"
+          value="{{ currentTicket['no_resi'] }}"
+          hidden
+        />
+        <input type="text" name="currentJam" value="{{ currentJam }}" hidden />
+        <input
+          type="text"
+          name="currentMenit"
+          value="{{ currentMenit}}"
+          hidden
+        />
+        <input
+          type="text"
+          name="totalDurasi"
+          value="{{ totalDurasi }}"
+          hidden
+        />
+        <input type="text" name="totalBiaya" value="{{ totalBiaya }}" hidden />
+        <button type="submit" class="btn-submit">
+          <i class="bx bx-log-in-circle"></i> Konfirmasi Pembayaran
+        </button>
+      </form>
+    </div>
+    {% elif isConfirmed == '1' %}
+    <div class="success-state">
+      <div class="icon-circle">
+        <i class="bx bx-check"></i>
+      </div>
+      <h3 class="success-title">Kendaraan Berhasil Keluar!</h3>
+      <p>Detail pembayaran telah disimpan di Riwayat Transaksi</p>
+    </div>
+    {% else %}
+    <div class="empty-state-card">
+      <i class="bx bxs-parking"></i>
+      <p>Silakan input data di samping untuk mencetak biaya.</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+%}
+<div class="toast-container">
+  {% for category, message in messages %}
+  <div class="toast show">
+    <div class="toast-header">
+      {% if category == 'success' %}
+      <strong class="me-auto">Berhasil</strong>
+      {% else %}
+      <strong class="me-auto">Gagal</strong>
+      {% endif %}
+    </div>
+    <div class="toast-body">{{ message }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %} {% endblock %}

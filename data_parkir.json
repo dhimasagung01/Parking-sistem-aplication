@@ -1,32 +1,34 @@
 {
-    "tiket_aktif": {
-        "P-MT22.40-D 1222 SSS": {
-            "no_kendaraan": "D 1222 SSS",
+    "tiket_aktif": [
+        {
+            "no_resi": "P-MT16.46-ASDDS",
+            "no_kendaraan": "ASDDS",
             "jenis_kendaraan": "Motor",
-            "jam_masuk": 22,
-            "menit_masuk": 40,
-            "total_masuk_menit": 1360,
-            "tarif_per_jam": 3000
-        },
-        "P-MT10.37-S 1111 PPP": {
-            "no_kendaraan": "S 1111 PPP",
-            "jenis_kendaraan": "Motor",
-            "waktu_masuk_str": "10:37",
-            "jam_masuk": 10,
-            "menit_masuk": 37,
-            "total_masuk_menit": 637,
+            "kode_jenis": "MT",
+            "jam_masuk": 16,
+            "menit_masuk": 46,
+            "total_masuk_menit": 1006,
             "tarif_per_jam": 3000,
-            "is_member": false
+            "is_member": false,
+            "telp_member": "",
+            "waktu_masuk_str": "16:46",
+            "tanggal": "2026-01-10"
         },
-        "P-MB10.53-S 1222 XXX": {
-            "no_kendaraan": "S 1222 XXX",
-            "jenis_kendaraan": "Mobil",
-            "waktu_masuk_str": "10:53",
-            "total_masuk_menit": 653,
-            "tarif_per_jam": 5000,
-            "is_member": false
+        {
+            "no_resi": "P-MT17.03-SADSAD",
+            "no_kendaraan": "SADSAD",
+            "jenis_kendaraan": "Motor",
+            "kode_jenis": "MT",
+            "jam_masuk": 17,
+            "menit_masuk": 3,
+            "total_masuk_menit": 1023,
+            "tarif_per_jam": 3000,
+            "is_member": false,
+            "telp_member": "",
+            "waktu_masuk_str": "17:03",
+            "tanggal": "2026-01-10"
         }
-    },
+    ],
     "riwayat_transaksi": [
         {
             "no_resi": "P-MB2246-D 1222 SSS",
@@ -66,6 +68,16 @@
             "waktu_keluar": "22:55",
             "durasi": "1 Jam",
             "total_bayar": 3000,
+            "is_member": false
+        },
+        {
+            "no_resi": "P-MT16.33-ASDDSASD",
+            "no_kendaraan": "ASDDSASD",
+            "jenis_kendaraan": "Motor",
+            "waktu_masuk": "16:33",
+            "waktu_keluar": "12:12",
+            "durasi": "20 Jam",
+            "total_bayar": "60.000",
             "is_member": false
         }
     ],
