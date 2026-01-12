@@ -73,4 +73,87 @@
 
     <main class="main-content">{% block content %} {% endblock %}</main>
   </body>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    
+    // Cari elemen custom wrapper
+    x = document.getElementsByClassName("custom-select-wrapper");
+    l = x.length;
+    
+    // Ambil elemen select asli
+    selElmnt = document.getElementById("realSelect");
+    ll = selElmnt.length;
+    
+    // Ambil div yang bertindak sebagai tombol/display terpilih
+    a = x[0].querySelector(".select-selected");
+    
+    // Ambil container untuk opsi list
+    b = x[0].querySelector(".select-items");
+
+    // Loop semua opsi di select asli untuk dipindahkan ke custom div
+    for (j = 1; j < ll; j++) {
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        
+        // Ketika item custom diklik
+        c.addEventListener("click", function(e) {
+            var y, i, k, s, h, sl, yl;
+            s = document.getElementById("realSelect"); // Select asli
+            sl = s.length;
+            h = this.parentNode.previousElementSibling; // Header custom (display)
+            
+            for (i = 0; i < sl; i++) {
+                if (s.options[i].innerHTML == this.innerHTML) {
+                    s.selectedIndex = i; // Update select asli
+                    h.innerHTML = this.innerHTML; // Update tampilan
+                    
+                    // Atur class 'same-as-selected' (warna cyan)
+                    y = this.parentNode.getElementsByClassName("same-as-selected");
+                    yl = y.length;
+                    for (k = 0; k < yl; k++) {
+                        y[k].removeAttribute("class");
+                    }
+                    this.setAttribute("class", "same-as-selected");
+                    break;
+                }
+            }
+            h.click(); // Tutup dropdown
+        });
+        b.appendChild(c);
+    }
+
+    // Event listener saat tombol utama diklik (Buka/Tutup)
+    a.addEventListener("click", function(e) {
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.nextElementSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
+    });
+
+    // Fungsi menutup dropdown jika klik di luar
+    function closeAllSelect(elmnt) {
+        var x, y, i, xl, yl, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        xl = x.length;
+        yl = y.length;
+        for (i = 0; i < yl; i++) {
+            if (elmnt == y[i]) {
+                arrNo.push(i)
+            } else {
+                y[i].classList.remove("select-arrow-active");
+            }
+        }
+        for (i = 0; i < xl; i++) {
+            if (arrNo.indexOf(i)) {
+                x[i].classList.add("select-hide");
+            }
+        }
+    }
+    
+    // Jika user klik sembarang tempat, tutup dropdown
+    document.addEventListener("click", closeAllSelect);
+});
+</script>
 </html>

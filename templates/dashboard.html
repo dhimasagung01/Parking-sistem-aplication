@@ -53,8 +53,8 @@
     </div>
 </div>
 
-<div class="parking-area">
-    <div class="parking-header">
+<div class="table-wrapper">
+    <div class="table-header-card">
         <i class='bx bxs-car'></i> Kendaraan Sedang Parkir
     </div>
 
@@ -71,9 +71,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for resi, item in tiket_aktif.items() %}
+                    {% for item in tiket_aktif %}
                     <tr>
-                        <td class="resi-font">{{ resi }}</td>
+                        <td class="resi-font">{{ item.no_resi }}</td>
                         <td class="plat-nomor">{{ item.no_kendaraan }}</td>
                         <td>
                             {% if item.jenis_kendaraan == 'Motor' %}

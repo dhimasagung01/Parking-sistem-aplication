@@ -137,7 +137,7 @@ header p {
 }
 
 .card {
-  background-color: var(--bg-card);
+  background-color: #0e142480;
   padding: 20px;
   border-radius: 12px;
   display: flex;
@@ -175,7 +175,7 @@ header p {
 
 /* --- EMPTY STATE AREA --- */
 .parking-area {
-  background-color: var(--bg-card);
+  background-color: #0e142480;
   border-radius: 12px;
   padding: 20px;
   border: 1px solid #334155;
@@ -552,10 +552,11 @@ header p {
 .divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.08);
-  margin: 20px 0;
+  margin-bottom: 10px;
 }
 
 .payment-card-footer {
+  padding: 8px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -584,6 +585,8 @@ header p {
   min-width: 300px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   animation: slideIn 0.5s ease;
+  margin-top: 20px; 
+  margin-bottom: 20px; 
 }
 
 .toast-header strong {
@@ -605,4 +608,674 @@ header p {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+/* Container Utama */
+.custom-select-wrapper {
+  position: relative;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* Bagian Tombol/Trigger (Tampilan Awal) */
+.select-selected {
+  background-color: #0f172a; /* Dark Blue Background */
+  color: #ffffff;
+  padding: 12px 15px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+}
+
+/* Efek panah di sebelah kanan */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 22px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Saat menu terbuka, panah berputar */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 10px;
+}
+
+/* Container untuk Opsi (Dropdown list) */
+.select-items {
+  position: absolute;
+  background-color: #0f172a;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  margin-top: 5px;
+  max-height: 200px; /* Agar bisa di-scroll jika datanya banyak */
+  overflow-y: auto;
+}
+
+/* Sembunyikan item saat tidak diklik */
+.select-hide {
+  display: none;
+}
+
+/* Styling Tiap Item Opsi */
+.select-items div {
+  color: #ffffff;
+  padding: 12px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #1e293b;
+}
+
+.select-items div:last-child {
+  border-bottom: none;
+}
+
+/* Efek Hover (Saat mouse di atas opsi) */
+.select-items div:hover {
+  background-color: #1e293b;
+}
+
+/* STYLE KHUSUS: Item yang Sedang Dipilih (Warna Cyan) */
+.same-as-selected {
+  background-color: #0ea5e9 !important; /* Warna Cyan/Biru Muda */
+  color: white;
+  font-weight: bold;
+}
+
+.content-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 350px 1fr; /* Kiri fix 350px, Kanan sisa ruang */
+  gap: 25px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .content-grid {
+    margin-top: 20px;
+    grid-template-columns: 1fr; /* Jadi 1 kolom di layar tablet/HP */
+  }
+}
+
+/* --- 2. LEFT COLUMN (FORM CARD) --- */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Input Styles yang lebih spesifik */
+.custom-input::placeholder {
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+/* Info Card (Box "Keuntungan Member") */
+.info-card {
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.1) 0%, rgba(15, 23, 42, 0) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.info-header {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  font-size: 0.85rem;
+  color: #94a3b8; /* Text Secondary */
+  margin-bottom: 10px;
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  line-height: 1.4;
+}
+
+/* Custom Bullet Point (Titik Cyan) */
+.info-list li::before {
+  content: "•";
+  color: var(--accent);
+  font-size: 1.2rem;
+  line-height: 1rem;
+}
+
+/* --- 3. RIGHT COLUMN (TABLE) --- */
+.right-column {
+  height: 100%;
+}
+
+.table-wrapper {
+  background-color: #0e142480;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow: hidden; /* Supaya border radius tidak tertutup anak elemen */
+}
+
+.table-header-card {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.table-header-card i {
+  color: var(--accent);
+  font-size: 16px;
+  margin-top: 3px;
+}
+
+.table-header-card span {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin-left: 5px;
+}
+
+/* Styling Tabel Spesifik */
+.member-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.member-table th {
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: rgba(15, 23, 42, 0.3);
+}
+
+.member-table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.member-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Badge Kunjungan (Pill Shape Biru) */
+.badge-visit {
+  background-color: rgba(6, 182, 212, 0.15);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* Tombol Hapus (Icon Sampah Merah) */
+.action-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ef4444; /* Merah */
+  font-size: 1.1rem;
+  padding: 8px;
+  border-radius: 6px;
+  transition: 0.2s;
+  opacity: 0.8;
+}
+
+.action-delete:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  opacity: 1;
+}
+
+/* Nama Member Bold */
+.member-name {
+  font-weight: 600;
+  color: white;
+}
+
+/* Tanggal & Telp agak abu */
+.text-dim {
+  color: #94a3b8;
+  font-family: monospace; /* Agar angka rapi */
+}
+
+/* Empty State untuk Tabel */
+.empty-row td {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+/* --- ACTION BUTTONS (VIEW & DELETE) --- */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+/* Tombol View (Biru/Cyan) */
+.action-btn.view {
+  background-color: rgba(6, 182, 212, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+.action-btn.view:hover {
+  background-color: var(--accent);
+  color: #0f172a; /* Hitam saat hover agar kontras */
+}
+
+/* Tombol Delete (Merah) */
+.action-btn.delete {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.action-btn.delete:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Hitam transparan */
+    z-index: 1000; /* Supaya di atas segalanya */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Animasi */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Class untuk memunculkan modal */
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 2. Kotak Modal */
+.modal-card {
+    background-color: #0f172a; /* Warna Background ParkEase */
+    border: 1px solid #334155;
+    padding: 25px;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-card {
+    transform: translateY(0);
+}
+
+/* 3. Typography Modal */
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.modal-desc {
+    font-size: 0.9rem;
+    color: #94a3b8; /* Abu-abu */
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.text-highlight {
+    color: white;
+    font-weight: bold;
+}
+
+/* 4. Tombol Aksi */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 1px solid #334155;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #1e293b;
+}
+
+.btn-confirm-delete {
+    background-color: #ef4444; /* Merah */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.btn-confirm-delete:hover {
+    background-color: #dc2626; /* Merah lebih gelap */
+}
+
+.empty-state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 400px; /* Tinggi minimum agar terlihat proporsional */
+}
+
+/* Icon Orang Besar */
+.empty-icon {
+    font-size: 5rem;     /* Ukuran besar */
+    color: #94a3b8;      /* Warna abu-abu */
+    opacity: 0.2;        /* Transparansi agar tidak terlalu mencolok */
+    margin-bottom: 20px;
+}
+
+/* Judul "Belum Ada Member" */
+.empty-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f1f5f9;      /* Putih terang */
+    margin-bottom: 10px;
+}
+
+/* Deskripsi di bawah judul */
+.empty-desc {
+    font-size: 0.95rem;
+    color: #64748b;      /* Abu-abu gelap */
+    max-width: 300px;    /* Membatasi lebar teks agar rapi */
+    line-height: 1.5;
+}
+
+.filter-container {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.filter-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Search Box Styling */
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #1e293b; /* Dark Card Bg */
+    border: 1px solid #334155;
+    padding: 10px 15px;
+    border-radius: 8px;
+    flex: 1; /* Search bar mengisi sisa ruang */
+    min-width: 250px;
+}
+
+.search-box i {
+    color: #94a3b8;
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.search-box input::placeholder {
+    color: #64748b;
+}
+
+/* Filter Group (Dropdowns) */
+.filter-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Custom Select Dark */
+.custom-select-dark {
+    position: relative;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    height: 44px; /* Samakan tinggi dengan search bar */
+    min-width: 160px;
+}
+
+.custom-select-dark i {
+    color: #94a3b8;
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.custom-select-dark select {
+    background: transparent;
+    border: none;
+    color: #f1f5f9;
+    font-size: 0.9rem;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    appearance: none; /* Hilangkan panah default browser */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Custom Arrow untuk Select */
+.custom-select-dark::after {
+    content: "\25BC"; /* Simbol panah bawah */
+    font-size: 0.6rem;
+    color: #94a3b8;
+    position: absolute;
+    right: 15px;
+    pointer-events: none;
+}
+
+.custom-select-dark select option {
+    background-color: #1e293b;
+    color: white;
+    padding: 10px;
+}
+
+/* Specific Table Styles for Riwayat */
+.table-riwayat th {
+    background-color: #1e293b; /* Header lebih gelap */
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+.card-dark {
+    background-color: #0e142480;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 768px) {
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        flex-direction: column;
+    }
+    
+    .custom-select-dark {
+        width: 100%;
+    }
+}
+
+.custom-dropdown {
+    position: relative;
+    width: 200px; /* Lebar dropdown */
+    font-family: inherit;
+}
+
+/* Tombol Pemicu (Trigger) */
+.dropdown-toggle {
+    background-color: #0f172a; /* Warna gelap sama dengan background */
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.dropdown-toggle:hover {
+    border-color: var(--accent);
+}
+
+/* Ikon panah berputar saat aktif */
+.custom-dropdown.open .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+/* Menu Dropdown (Wadah Pilihan) */
+.dropdown-menu {
+    position: absolute;
+    top: 110%; /* Muncul sedikit di bawah tombol */
+    left: 0;
+    width: 100%;
+    background-color: #0f172a; /* Background Gelap */
+    border: 1px solid #334155;
+    border-radius: 12px; /* Sudut melengkung */
+    padding: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    
+    /* Animasi muncul */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+}
+
+/* Kelas untuk memunculkan menu */
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Item Pilihan */
+.dropdown-item {
+    padding: 10px 15px;
+    color: #94a3b8; /* Teks abu-abu jika tidak aktif */
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2px;
+    transition: 0.2s;
+}
+
+.dropdown-item:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.05); /* Efek hover halus */
+}
+
+/* --- STATE ACTIVE (SEPERTI GAMBAR) --- */
+.dropdown-item.active {
+    background-color: var(--accent); /* Warna Cyan */
+    color: #0f172a; /* Teks jadi hitam/gelap agar kontras */
+    font-weight: 600;
+}
+
+.dropdown-item.active:hover {
+    background-color: #0891b2; /* Cyan agak gelap saat hover */
+    color: #0f172a;
+}
+
+/* Ikon Ceklis */
+.check-icon {
+    font-size: 1.2rem;
+    opacity: 0; /* Sembunyikan ceklis secara default */
+    width: 20px;
+}
+
+/* Munculkan ceklis HANYA jika item aktif */
+.dropdown-item.active .check-icon {
+    opacity: 1;
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+    .custom-dropdown {
+        width: 100%; /* Full width di HP */
+    }
 }

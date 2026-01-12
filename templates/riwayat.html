@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h2>Riwayat Transaksi</h2>
+    <p>Lihat semua transaksi yang telah selesai</p>
+</header>
+
+<div class="filter-container">
+    <form action="/riwayat" method="GET" class="filter-form" id="filterForm">
+        
+        <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" name="search" placeholder="Cari no. kendaraan atau resi..." 
+                   value="{{ search_query }}" autocomplete="off">
+        </div>
+
+        <div class="filter-group">
+            
+            <div class="custom-dropdown" id="dropdownJenis">
+                <input type="hidden" name="jenis" value="{{ filter_jenis }}">
+                
+                <div class="dropdown-toggle">
+                    <span class="selected-text">
+                        {{ filter_jenis if filter_jenis else 'Semua Jenis' }}
+                    </span>
+                    <i class='bx bx-chevron-down'></i>
+                </div>
+
+                <div class="dropdown-menu">
+                    <div class="dropdown-item {{ 'active' if not filter_jenis or filter_jenis == '' }}" 
+                         data-value="">
+                        <i class='bx bx-check check-icon'></i>
+                        <span>Semua Jenis</span>
+                    </div>
+                    
+                    <div class="dropdown-item {{ 'active' if filter_jenis == 'Motor' }}" 
+                         data-value="Motor">
+                        <i class='bx bx-check check-icon'></i>
+                        <span>Motor</span>
+                    </div>
+
+                    <div class="dropdown-item {{ 'active' if filter_jenis == 'Mobil' }}" 
+                         data-value="Mobil">
+                        <i class='bx bx-check check-icon'></i>
+                        <span>Mobil</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="custom-dropdown" id="dropdownStatus">
+                <input type="hidden" name="status" value="{{ filter_status }}">
+                
+                <div class="dropdown-toggle">
+                    <span class="selected-text">
+                        {{ filter_status if filter_status else 'Semua Status' }}
+                    </span>
+                    <i class='bx bx-chevron-down'></i>
+                </div>
+
+                <div class="dropdown-menu">
+                    <div class="dropdown-item {{ 'active' if not filter_status or filter_status == '' }}" 
+                         data-value="">
+                        <i class='bx bx-check check-icon'></i>
+                        <span>Semua Status</span>
+                    </div>
+                    <div class="dropdown-item {{ 'active' if filter_status == 'Member' }}" 
+                         data-value="Member">
+                        <i class='bx bx-check check-icon'></i>
+                        <span>Member</span>
+                    </div>
+                    <div class="dropdown-item {{ 'active' if filter_status == 'Reguler' }}" 
+                         data-value="Reguler">
+                        <i class='bx bx-check check-icon'></i>
+                        <span>Reguler</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="stats-grid" style="margin-top: 20px;">
+    <div class="card card-dark">
+        <div class="card-info">
+            <h3 style="color: #94a3b8; font-size: 0.85rem;">Total Transaksi</h3>
+            <h1 style="color: var(--accent); font-size: 1.8rem;">{{ total_transaksi }}</h1>
+        </div>
+    </div>
+
+    <div class="card card-dark">
+        <div class="card-info">
+            <h3 style="color: #94a3b8; font-size: 0.85rem;">Total Pendapatan</h3>
+            <h1 style="color: #22c55e; font-size: 1.8rem;">Rp {{ total_pendapatan }}</h1>
+        </div>
+    </div>
+</div>
+
+<div class="table-wrapper" style="margin-top: 25px;">
+    <div class="table-responsive">
+        {% if transaksi %}
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>WAKTU KELUAR</th>
+                    <th>NO. RESI</th>
+                    <th>KENDARAAN</th>
+                    <th>JENIS</th>
+                    <th>DURASI</th>
+                    <th>STATUS</th>
+                    <th>TOTAL</th>
+                    <th style="text-align: center;">AKSI</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in transaksi %}
+                <tr>
+                    <td style="color: #94a3b8; font-size: 0.85rem;">
+                        {{ item.waktu_keluar }}
+                        <br>
+                        </td>
+                    <td class="resi-font">{{ item.no_resi }}</td>
+                    <td style="font-weight: bold;">{{ item.no_kendaraan }}</td>
+                    <td>
+                        {% if item.jenis_kendaraan == 'Motor' %}
+                            <span style="color: #f59e0b; display: flex; align-items: center; gap: 5px;">
+                                <i class='bx bx-cycling'></i> Motor
+                            </span>
+                        {% else %}
+                            <span style="color: var(--accent); display: flex; align-items: center; gap: 5px;">
+                                <i class='bx bxs-car'></i> Mobil
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.durasi }}</td>
+                    <td>
+                        {% if item.is_member %}
+                            <span class="status-badge member">Member</span>
+                        {% else %}
+                            <span class="status-badge reguler">Reguler</span>
+                        {% endif %}
+                    </td>
+                    <td style="color: #22c55e; font-weight: bold;">
+                        Rp {{ item.total_bayar }}
+                    </td>
+                    <td style="text-align: center;">
+                        <button type="button" class="action-btn view" 
+                            onclick="openDetailModal(
+                                '{{ item.no_resi }}',
+                                '{{ item.no_kendaraan }}',
+                                '{{ item.jenis_kendaraan }}',
+                                '{{ item.waktu_masuk }}',
+                                '{{ item.waktu_keluar }}',
+                                '{{ item.durasi }}',
+                                '{{ item.total_bayar }}',
+                                '{% if item.is_member %}Member{% else %}Reguler{% endif %}'
+                            )"
+                            title="Lihat Detail Struk">
+                            <i class='bx bx-show'></i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <i class='bx bx-search-alt'></i>
+            <p>Tidak ada riwayat transaksi yang ditemukan.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div id="detailModal" class="modal-overlay">
+    <div class="modal-card" style="width: 380px;">
+        
+        <div style="text-align: center; border-bottom: 2px dashed #334155; padding-bottom: 15px; margin-bottom: 20px;">
+            <i class='bx bxs-car-garage' style="font-size: 3rem; color: var(--accent); margin-bottom: 10px;"></i>
+            <h3 style="color: white; font-family: monospace; letter-spacing: 1px; margin-bottom: 5px;">BUKTI TRANSAKSI</h3>
+            <p style="color: #94a3b8; font-size: 0.8rem;">ParkEase Management System</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+            <div class="detail-row">
+                <span style="color: #94a3b8;">No. Resi</span>
+                <span id="dResi" style="color: var(--accent); font-family: monospace;"></span>
+            </div>
+            <div class="detail-row">
+                <span style="color: #94a3b8;">Kendaraan</span>
+                <span id="dNopol" style="color: white; font-weight: bold;"></span>
+            </div>
+            <div class="detail-row">
+                <span style="color: #94a3b8;">Jenis</span>
+                <span id="dJenis" style="color: white;"></span>
+            </div>
+            <div class="detail-row">
+                <span style="color: #94a3b8;">Status</span>
+                <span id="dStatus" style="font-weight: bold;"></span>
+            </div>
+            
+            <div style="border-top: 1px solid #334155; margin: 5px 0;"></div>
+
+            <div class="detail-row">
+                <span style="color: #94a3b8;">Masuk</span>
+                <span id="dMasuk" style="color: white;"></span>
+            </div>
+            <div class="detail-row">
+                <span style="color: #94a3b8;">Keluar</span>
+                <span id="dKeluar" style="color: white;"></span>
+            </div>
+            <div class="detail-row">
+                <span style="color: #94a3b8;">Durasi</span>
+                <span id="dDurasi" style="color: white;"></span>
+            </div>
+        </div>
+
+        <div style="background: rgba(34, 197, 94, 0.1); border: 1px dashed #22c55e; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center;">
+             <span style="display: block; color: #22c55e; font-size: 0.75rem; letter-spacing: 1px;">TOTAL DIBAYAR</span>
+             <span id="dTotal" style="display: block; color: #22c55e; font-size: 1.8rem; font-weight: bold; margin-top: 5px;"></span>
+        </div>
+
+        <button onclick="document.getElementById('detailModal').classList.remove('show')" 
+                class="btn-cancel" 
+                style="width: 100%; margin-top: 20px; justify-content: center; background-color: #1e293b; color: white;">
+            Tutup
+        </button>
+    </div>
+</div>
+
+<script>
+function openDetailModal(resi, nopol, jenis, masuk, keluar, durasi, total, status) {
+        // Isi data ke elemen HTML
+        document.getElementById('dResi').textContent = resi;
+        document.getElementById('dNopol').textContent = nopol;
+        document.getElementById('dJenis').textContent = jenis;
+        document.getElementById('dMasuk').textContent = masuk;
+        document.getElementById('dKeluar').textContent = keluar;
+        document.getElementById('dDurasi').textContent = durasi;
+        document.getElementById('dTotal').textContent = 'Rp ' + total;
+        
+        const elStatus = document.getElementById('dStatus');
+        elStatus.textContent = status;
+        
+        // Warna status
+        if(status === 'Member') {
+            elStatus.style.color = '#4ade80'; // Hijau
+        } else {
+            elStatus.style.color = '#cbd5e1'; // Abu-abu
+        }
+
+        // Tampilkan Modal
+        document.getElementById('detailModal').classList.add('show');
+    }
+
+    // Tutup Modal jika klik di luar area
+    window.onclick = function(event) {
+        const modal = document.getElementById('detailModal');
+        if (event.target == modal) {
+            modal.classList.remove('show');
+        }
+    }
+    
+document.addEventListener("DOMContentLoaded", function() {
+    // Cari semua elemen dropdown custom
+    const dropdowns = document.querySelectorAll(".custom-dropdown");
+
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector(".dropdown-toggle");
+        const menu = dropdown.querySelector(".dropdown-menu");
+        const input = dropdown.querySelector("input[type='hidden']");
+        const form = document.getElementById("filterForm");
+
+        // 1. Toggle Menu saat diklik
+        toggle.addEventListener("click", (e) => {
+            e.stopPropagation(); // Mencegah event bubble
+            
+            // Tutup dropdown lain sebelum membuka yang ini
+            document.querySelectorAll(".dropdown-menu").forEach(m => {
+                if (m !== menu) m.classList.remove("show");
+            });
+
+            menu.classList.toggle("show");
+            dropdown.classList.toggle("open");
+        });
+
+        // 2. Pilih Item
+        const items = dropdown.querySelectorAll(".dropdown-item");
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                const value = item.getAttribute("data-value");
+                
+                // Update nilai input hidden
+                input.value = value;
+                
+                // Submit form otomatis agar filter berjalan
+                form.submit();
+            });
+        });
+    });
+
+    // 3. Tutup dropdown jika klik di luar
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".custom-dropdown")) {
+            document.querySelectorAll(".dropdown-menu").forEach(menu => {
+                menu.classList.remove("show");
+            });
+            document.querySelectorAll(".custom-dropdown").forEach(d => {
+                d.classList.remove("open");
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    
+    <a href="/member" style="color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 5px; margin-bottom: 20px;">
+        <i class='bx bx-arrow-back'></i> Kembali ke Daftar
+    </a>
+
+    <div class="form-card" style="text-align: center; padding: 40px;">
+        
+        <div style="width: 100px; height: 100px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px solid var(--accent);">
+            <i class='bx bxs-user' style="font-size: 3rem; color: var(--accent);"></i>
+        </div>
+
+        <h2 style="color: white; margin-bottom: 5px;">{{ member.nama }}</h2>
+        <span class="badge-visit" style="font-size: 1rem; padding: 5px 15px;">Member ParkEase</span>
+
+        <div style="margin-top: 30px; text-align: left; background: #0f172a; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                <span style="color: #94a3b8;">Nomor Telepon</span>
+                <span style="color: white; font-family: monospace; font-size: 1.1rem;">{{ member.telepon }}</span>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                <span style="color: #94a3b8;">Tanggal Bergabung</span>
+                <span style="color: white;">{{ member.tanggal_daftar }}</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+                <span style="color: #94a3b8;">Total Kunjungan</span>
+                <span style="color: var(--accent); font-weight: bold;">{{ member.jumlah_kunjungan }} Kali</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

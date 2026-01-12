@@ -1,8 +1,8 @@
 {% extends "base.html" %} {% block content %}
-<div class="header-section">
-  <h2><i class="bx bx-log-in-circle"></i> Kendaraan Masuk</h2>
+<header>
+  <h2>Kendaraan Masuk</h2>
   <p>Input data kendaraan yang masuk parkir</p>
-</div>
+</header>
 
 <div class="entry-grid">
   <div class="form-card">
@@ -83,14 +83,20 @@
       <div class="form-group">
         <label><i class="bx bx-phone"></i> No. Telepon Member (Opsional)</label>
         <input
-          type="text"
-          name="telp_member"
-          class="custom-input"
-          placeholder="08xxxxxxxxxx"
-        />
-        <small style="color: #64748b; margin-top: 5px; display: block"
-          >Member mendapat tarif flat Rp 5.000 (max 24 jam)</small
+            type="text" 
+            name="telp_member" 
+            class="custom-input" 
+            placeholder="08xxxxxxxxxx"
+            autocomplete="off" 
+            pattern="[0-9]+" 
+            minlength="10" 
+            maxlength="13"
+            title="Harus berupa angka, 10-13 digit"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
         >
+        <small style="color: #64748b; margin-top: 5px; display: block">
+            Isi jika pelanggan adalah Member (Wajib 10-13 digit angka)
+        </small>
       </div>
 
       <button type="submit" class="btn-submit">

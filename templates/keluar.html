@@ -1,28 +1,37 @@
 {% extends "base.html" %} {% block content %}
-<div class="header-section">
-  <h2><i class="bx bx-log-out-circle"></i> Kendaraan Keluar</h2>
+<header>
+  <h2>Kendaraan Keluar</h2>
   <p>Input data kendaraan yang keluar parkir</p>
-</div>
-
+</header>
 <div class="entry-grid">
   <div class="form-card">
     <form method="POST">
       <input type="text" name="is_confirm" value="0" hidden />
       <div class="form-group">
         <label>Pilih Nomor Resi</label>
-        <select
-          name="no_resi"
-          class="custom-input"
-          placeholder="Pilih resi kendaraan"
-          required
-        >
-          {% for tiket in tiket_aktif %}
-          <option value="{{ tiket['no_resi'] }}">
-            {{ tiket['no_resi'] }} | {{ tiket['no_kendaraan'] }} | {{
-            tiket['jenis_kendaraan'] }}
+        <select 
+          name="no_resi" 
+          id="realSelect" 
+          style="display: none;"
+          >
+          <option
+          value="" 
+          disabled selected
+          >
+          Pilih resi kendaraan
           </option>
-          {% endfor %}
+          {% for tiket in tiket_aktif %}
+            <option value="{{ tiket['no_resi'] }}">
+              {{ tiket['no_resi'] }} | {{ tiket['no_kendaraan'] }} | {{
+              tiket['jenis_kendaraan'] }}
+            </option>
+            {% endfor %}
         </select>
+        <div class="custom-select-wrapper">
+          <div class="select-selected">Pilih resi kendaraan</div>
+          <div class="select-items select-hide">
+              </div>
+      </div>
       </div>
 
       <div class="form-group">
@@ -31,6 +40,7 @@
           type="date"
           name="tanggal"
           class="custom-input"
+          value="{{tanggal_keluar}}"
           required
           autocomplete="off"
         />
@@ -91,6 +101,10 @@
           <strong>{{ currentTicket['jenis_kendaraan'] }}</strong>
         </div>
         <div class="payment-card-row">
+          <span>Tanggal Masuk</span>
+          <strong>{{ currentTicket['tanggal'] }}</strong>
+        </div>
+        <div class="payment-card-row">
           <span>Jam Masuk</span>
           <strong>{{ currentTicket['waktu_masuk_str'] }}</strong>
         </div>
@@ -140,7 +154,18 @@
           value="{{ totalDurasi }}"
           hidden
         />
-        <input type="text" name="totalBiaya" value="{{ totalBiaya }}" hidden />
+        <input
+         type="text" 
+         name="totalBiaya" 
+         value="{{ totalBiaya }}" 
+         hidden 
+         />
+        <input
+         type="text" 
+         name="tanggal" 
+         value="{{ tanggal_keluar }}" 
+         hidden 
+         />
         <button type="submit" class="btn-submit">
           <i class="bx bx-log-in-circle"></i> Konfirmasi Pembayaran
         </button>

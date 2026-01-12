@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h2>Kelola Member</h2>
+    <p>Tambah dan kelola data member parkir</p>
+</header>
+
+<div class="content-grid">
+    <div class="left-column">
+        <div class="form-card">
+            <div
+                style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: bold; color: white;">
+                <i class='bx bx-user-plus' style="color: var(--accent);"></i> Tambah Member Baru
+            </div>
+
+            <form action="/member" method="POST">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" name="nama" class="custom-input" placeholder="Masukan Nama Lengkap" required
+                        autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor Telepon</label>
+                    <input type="text" name="telepon" class="custom-input" placeholder="08xxxxxxxxxx" required
+                        autocomplete="off" pattern="[0-9]+" minlength="10" maxlength="13"
+                        title="Harus berupa angka, 10-13 digit"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                    <small style="color: #64748b; font-size: 0.75rem; margin-top: 5px; display: block;">
+                        <i class='bx bx-info-circle'></i> Wajib 10-13 digit angka
+                    </small>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class='bx bx-user-check'></i> Tambah Member
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="right-column">
+        <div class="table-wrapper">
+            <div class="table-header-card">
+                <i class='bx bx-list-ul'></i> Daftar Member 
+                <span>({{ members|length }})</span>
+            </div>
+            
+
+            <div class="table-responsive">
+                {% if members %}
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>NAMA LENGKAP</th>
+                                <th>NO. TELEPON</th>
+                                <th>TGL DAFTAR</th>
+                                <th style="text-align: center;">KUNJUNGAN</th>
+                                <th style="text-align: center;">AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for member in members %}
+                            <tr>
+                                <td class="plat-nomor" style="font-size: 0.95rem;">{{ member.nama }}</td>
+                                
+                                <td class="resi-font" style="color: #94a3b8;">{{ member.telepon }}</td>
+                                
+                                <td style="color: var(--text-primary);">{{ member.tanggal_daftar }}</td>
+                                
+                                <td style="text-align: center;">
+                                    <span class="status-badge member">
+                                        {{ member.jumlah_kunjungan }}x
+                                    </span>
+                                </td>
+                                
+                                <td style="text-align: center;">
+                                    <div style="display: flex; gap: 8px; justify-content: center;">
+                                        <a href="/member/view/{{ member.telepon }}" class="action-btn view" title="Lihat Detail">
+                                            <i class='bx bx-show'></i>
+                                        </a>
+
+                                        <button type="button" class="action-btn edit" style="color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.1);" 
+                                            onclick="openEditModal('{{ member.nama }}', '{{ member.telepon }}')" 
+                                            title="Edit Data">
+                                            <i class='bx bx-edit'></i>
+                                        </button>
+
+                                        <button type="button" class="action-btn delete"
+                                            onclick="openDeleteModal('/member/delete/{{ member.telepon }}', '{{ member.nama }}')"
+                                            title="Hapus Member">
+                                            <i class='bx bx-trash'></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% else %}
+                    <div class="empty-state-container">
+                        <i class='bx bx-group empty-icon'></i>
+                        <h3 class="empty-title">Belum Ada Member</h3>
+                        <p class="empty-desc">Tambahkan member pertama menggunakan form di samping</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editModal" class="modal-overlay">
+    <div class="modal-card">
+        <h3 class="modal-title">Edit Data Member</h3>
+        <p class="modal-desc">Perbarui informasi nama atau nomor telepon.</p>
+
+        <form action="/member/update" method="POST">
+            <input type="hidden" name="old_telepon" id="editOldTelepon">
+
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" name="nama" id="editNama" class="custom-input" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label>Nomor Telepon</label>
+                <input type="text" name="telepon" id="editTelepon" class="custom-input" required
+                    autocomplete="off" pattern="[0-9]+" minlength="10" maxlength="13"
+                    title="Harus berupa angka, 10-13 digit"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" onclick="closeEditModal()" class="btn-cancel">Batal</button>
+                <button type="submit" class="btn-submit" style="width: auto; padding: 10px 20px;">
+                    Simpan Perubahan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal-overlay">
+    <div class="modal-card">
+        <h3 class="modal-title">Hapus Member?</h3>
+        <p class="modal-desc">
+            Apakah Anda yakin ingin menghapus member <span id="modalMemberName" class="text-highlight"></span>?
+            Tindakan ini tidak dapat dibatalkan.
+        </p>
+
+        <div class="modal-actions">
+            <button onclick="closeDeleteModal()" class="btn-cancel">
+                Batal
+            </button>
+
+            <a id="confirmDeleteBtn" href="#" class="btn-confirm-delete">
+                Hapus
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openEditModal(nama, telepon) {
+        var modal = document.getElementById('editModal');
+        
+        // Isi form dengan data yang diklik
+        document.getElementById('editOldTelepon').value = telepon; // Kunci ID lama
+        document.getElementById('editNama').value = nama;
+        document.getElementById('editTelepon').value = telepon;
+        
+        // Tampilkan modal
+        modal.classList.add('show');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.remove('show');
+    }
+
+    // Update window.onclick agar bisa menutup kedua modal (Delete & Edit)
+    window.onclick = function (event) {
+        var deleteModal = document.getElementById('deleteModal');
+        var editModal = document.getElementById('editModal');
+        
+        if (event.target == deleteModal) {
+            closeDeleteModal();
+        }
+        if (event.target == editModal) {
+            closeEditModal();
+        }
+    }
+    
+    // Fungsi Buka Modal
+    function openDeleteModal(url, nama) {
+        // 1. Tampilkan modal
+        document.getElementById('deleteModal').classList.add('show');
+
+        // 2. Isi nama member ke dalam teks modal
+        document.getElementById('modalMemberName').textContent = nama;
+
+        // 3. Set link href pada tombol "Hapus" agar sesuai dengan member yg dipilih
+        document.getElementById('confirmDeleteBtn').href = url;
+    }
+
+    // Fungsi Tutup Modal
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('show');
+    }
+
+    // Tutup modal jika user klik di luar kotak (di area gelap)
+    window.onclick = function (event) {
+        var modal = document.getElementById('deleteModal');
+        if (event.target == modal) {
+            closeDeleteModal();
+        }
+    }
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+{% if messages%}
+<div class="toast-container">
+    {% for category, message in messages %}
+    <div class="toast show">
+        <div class="toast-header">
+            {% if category == 'success' %}
+            <strong class="me-auto">Berhasil</strong>
+            {% else %}
+            <strong class="me-auto">Gagal</strong>
+            {% endif %}
+        </div>
+        <div class="toast-body">{{ message }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}
