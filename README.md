@@ -47,12 +47,12 @@ Buka terminal (CMD/PowerShell/Terminal) dan jalankan perintah berikut untuk meng
 ```bash
 # Clone repository ini
 git clone https://github.com/dhimasagung01/Parking-sistem-aplication.git
+
 # Masuk ke folder project
-cd sistem-parkir
+cd Parking-sistem-aplication
 
 # Buka folder dengan
 code .
-
 
 Agar library tidak bentrok dengan sistem utama komputer Anda.
 # Untuk Windows
