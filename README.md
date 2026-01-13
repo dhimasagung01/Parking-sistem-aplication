@@ -46,8 +46,7 @@ Buka terminal (CMD/PowerShell/Terminal) dan jalankan perintah berikut untuk meng
 
 ```bash
 # Clone repository ini
-git clone https://github.com/dhimasagung01/sistem-parkir.git
-
+git clone https://github.com/dhimasagung01/Parking-sistem-aplication.git
 # Masuk ke folder project
 cd sistem-parkir
 
