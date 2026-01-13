@@ -45,29 +45,37 @@ Pastikan komputer Anda sudah terinstall:
 Buka terminal (CMD/PowerShell/Terminal) dan jalankan perintah berikut untuk mengunduh proyek ini:
 
 ```bash
-# Clone repository ini
 git clone https://github.com/dhimasagung01/Parking-sistem-aplication.git
-
-# Masuk ke folder project
+```
+Masuk ke folder project
+```bash
 cd Parking-sistem-aplication
+```
 
-# Buka folder dengan
-code .
-
+### 3. Instalasi
 Agar library tidak bentrok dengan sistem utama komputer Anda.
-# Untuk Windows
+
+### Untuk Windows
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
-# Untuk Mac/Linux
+### Untuk Mac/Linux
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
 Install framework Flask yang dibutuhkan:
+```bash
 pip install flask
+```
 
 Jalankan server Flask dengan perintah:
+```bash
 python app.py
+```
 
 Jika berhasil, akan muncul tulisan: Running on http://127.0.0.1:5000
 saling url yang ada ke browser
