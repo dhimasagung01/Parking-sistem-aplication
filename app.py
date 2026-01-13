@@ -122,9 +122,16 @@ def parkir_masuk():
             no_kendaraan = request.form.get('no_kendaraan', '').strip().upper()
             jenis_pilihan = request.form.get('jenis_kendaraan')
             tanggal = request.form.get('tanggal')
+            no_kendaraan_tersedia = any(t['no_kendaraan'] == no_kendaraan for t in data['tiket_aktif'])
+            
+            if no_kendaraan_tersedia:
+                raise ValueError(f"Kendaraan dengan nomor {no_kendaraan} sudah parkir!")
             
             if not no_kendaraan or not jenis_pilihan:
                 raise ValueError("Mohon lengkapi Nomor Kendaraan dan Jenis Kendaraan.")
+            
+            if not (3 <= len(no_kendaraan) <= 15):
+                raise ValueError("Panjang nomor kendaraan harus antara 3 sampai 15 karakter.")
 
             # Konversi input angka
             try:
@@ -139,9 +146,13 @@ def parkir_masuk():
 
             # --- BLOCK LOGIKA ---
             if jenis_pilihan == "1":
-                jenis_kendaraan = "Mobil"; kode_jenis = "MB"; tarif_per_jam = 5000
+                jenis_kendaraan = "Mobil"
+                kode_jenis = "MB"
+                tarif_per_jam = 5000
             else:
-                jenis_kendaraan = "Motor"; kode_jenis = "MT"; tarif_per_jam = 3000
+                jenis_kendaraan = "Motor"
+                kode_jenis = "MT"
+                tarif_per_jam = 3000
 
             if not tanggal:
                 raise ValueError("Mohon lengkapi Tanggal.")

@@ -1,108 +1,35 @@
 {
-    "tiket_aktif": [
-        {
-            "no_resi": "P-MB04.55-S 2323 PPP",
-            "no_kendaraan": "S 2323 PPP",
-            "jenis_kendaraan": "Mobil",
-            "kode_jenis": "MB",
-            "jam_masuk": 4,
-            "menit_masuk": 55,
-            "total_masuk_menit": 295,
-            "tarif_per_jam": 5000,
-            "is_member": false,
-            "telp_member": "",
-            "waktu_masuk_str": "04:55",
-            "tanggal": "2026-01-13"
-        },
-        {
-            "no_resi": "P-MB04.55-S 2323 PPP",
-            "no_kendaraan": "S 2323 PPP",
-            "jenis_kendaraan": "Mobil",
-            "kode_jenis": "MB",
-            "jam_masuk": 4,
-            "menit_masuk": 55,
-            "total_masuk_menit": 295,
-            "tarif_per_jam": 5000,
-            "is_member": false,
-            "telp_member": "",
-            "waktu_masuk_str": "04:55",
-            "tanggal": "2026-01-13"
-        },
-        {
-            "no_resi": "P-MB11.17-S 4343 CCC",
-            "no_kendaraan": "S 4343 CCC",
-            "jenis_kendaraan": "Mobil",
-            "kode_jenis": "MB",
-            "jam_masuk": 11,
-            "menit_masuk": 17,
-            "total_masuk_menit": 677,
-            "tarif_per_jam": 5000,
-            "is_member": false,
-            "telp_member": "",
-            "waktu_masuk_str": "11:17",
-            "tanggal": "2026-01-13"
-        }
-    ],
+    "tiket_aktif": [],
     "riwayat_transaksi": [
         {
-            "no_resi": "P-MB04.29-B 1233 SSS",
-            "no_kendaraan": "B 1233 SSS",
-            "jenis_kendaraan": "Mobil",
-            "waktu_masuk": "04:29",
-            "waktu_keluar": "21:22",
-            "durasi": "41 Jam",
-            "total_bayar": "205.000",
-            "is_member": false
-        },
-        {
-            "no_resi": "P-MT05.11-S 1221 SSS",
-            "no_kendaraan": "S 1221 SSS",
+            "no_resi": "P-MT21.25-D 1234 TEST",
+            "no_kendaraan": "D 1234 TEST",
             "jenis_kendaraan": "Motor",
-            "waktu_masuk": "05:11",
-            "waktu_keluar": "21:22",
-            "durasi": "17 Jam",
-            "total_bayar": "51.000",
+            "waktu_masuk": "21:25",
+            "waktu_keluar": "12:12",
+            "tanggal_keluar": "2026-01-16",
+            "durasi": "63 Jam",
+            "total_bayar": "189.000",
             "is_member": false
         },
         {
-            "no_resi": "P-MT04.39-B 1212 SSS",
-            "no_kendaraan": "B 1212 SSS",
-            "jenis_kendaraan": "Motor",
-            "waktu_masuk": "04:39",
-            "waktu_keluar": "2:12",
-            "durasi": "22 Jam",
-            "total_bayar": "66.000",
-            "is_member": false
-        },
-        {
-            "no_resi": "P-MB04.58-S 1233 PPP",
-            "no_kendaraan": "S 1233 PPP",
+            "no_resi": "P-MB21.32-S 1234 AAA",
+            "no_kendaraan": "S 1234 AAA",
             "jenis_kendaraan": "Mobil",
-            "waktu_masuk": "04:58",
-            "waktu_keluar": "12:22",
-            "durasi": "56 Jam",
+            "waktu_masuk": "21:32",
+            "waktu_keluar": "23:23",
+            "tanggal_keluar": "2026-01-15",
+            "durasi": "50 Jam",
             "total_bayar": "15.000",
             "is_member": true
-        },
-        {
-            "no_resi": "P-MB04.52-S 2323 QQQ",
-            "no_kendaraan": "S 2323 QQQ",
-            "jenis_kendaraan": "Mobil",
-            "waktu_masuk": "04:52",
-            "waktu_keluar": "21:12",
-            "tanggal_keluar": "2026-01-13",
-            "durasi": "41 Jam",
-            "total_bayar": "205.000",
-            "is_member": false
         }
     ],
     "member": [
         {
-            "nama": "Dhim",
-            "telepon": "085524591798",
-            "tanggal_daftar": "2026-01-12",
-            "jumlah_kunjungan": 1,
-            "status": "Aktif"
+            "nama": "test",
+            "telepon": "1274862178342",
+            "tanggal_daftar": "2026-01-13",
+            "jumlah_kunjungan": 1
         }
     ]
 }
