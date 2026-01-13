@@ -4,7 +4,7 @@
   --bg-card: #1e293b; /* Latar belakang kartu/sidebar */
   --text-primary: #f1f5f9; /* Warna teks utama (putih) */
   --text-secondary: #94a3b8; /* Warna teks sekunder (abu-abu) */
-  --accent: #06b6d4; /* Warna Cyan/Biru muda (ParkEase) */
+  --accent: #06b6d4; /* Warna Cyan/Biru muda () */
   --danger: #ef4444; /* Merah untuk error/hapus */
   --success: #22c55e; /* Hijau untuk sukses */
   --sidebar-width: 260px;
@@ -212,7 +212,7 @@ header p {
   opacity: 0.3;
 }
 
-/* --- TABLE STYLING (Seperti Gambar ParkEase) --- */
+/* --- TABLE STYLING (Seperti Gambar) --- */
 .table-responsive {
   overflow-x: auto; /* Agar bisa discroll jika layar kecil */
   width: 100%;
@@ -937,7 +937,7 @@ header p {
 
 /* 2. Kotak Modal */
 .modal-card {
-    background-color: #0f172a; /* Warna Background ParkEase */
+    background-color: #0f172a; /* Warna Background */
     border: 1px solid #334155;
     padding: 25px;
     border-radius: 12px;

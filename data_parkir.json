@@ -15,32 +15,32 @@
             "tanggal": "2026-01-13"
         },
         {
-            "no_resi": "P-MB08.27-S 4554 FFF",
-            "no_kendaraan": "S 4554 FFF",
+            "no_resi": "P-MB04.55-S 2323 PPP",
+            "no_kendaraan": "S 2323 PPP",
             "jenis_kendaraan": "Mobil",
             "kode_jenis": "MB",
-            "jam_masuk": 8,
-            "menit_masuk": 27,
-            "total_masuk_menit": 507,
+            "jam_masuk": 4,
+            "menit_masuk": 55,
+            "total_masuk_menit": 295,
             "tarif_per_jam": 5000,
             "is_member": false,
             "telp_member": "",
-            "waktu_masuk_str": "08:27",
-            "tanggal": "2026-01-12"
+            "waktu_masuk_str": "04:55",
+            "tanggal": "2026-01-13"
         },
         {
-            "no_resi": "P-MT08.28-V 5464 GHFG",
-            "no_kendaraan": "V 5464 GHFG",
-            "jenis_kendaraan": "Motor",
-            "kode_jenis": "MT",
-            "jam_masuk": 8,
-            "menit_masuk": 28,
-            "total_masuk_menit": 508,
-            "tarif_per_jam": 3000,
+            "no_resi": "P-MB11.17-S 4343 CCC",
+            "no_kendaraan": "S 4343 CCC",
+            "jenis_kendaraan": "Mobil",
+            "kode_jenis": "MB",
+            "jam_masuk": 11,
+            "menit_masuk": 17,
+            "total_masuk_menit": 677,
+            "tarif_per_jam": 5000,
             "is_member": false,
             "telp_member": "",
-            "waktu_masuk_str": "08:28",
-            "tanggal": "2026-01-12"
+            "waktu_masuk_str": "11:17",
+            "tanggal": "2026-01-13"
         }
     ],
     "riwayat_transaksi": [
@@ -93,17 +93,6 @@
             "tanggal_keluar": "2026-01-13",
             "durasi": "41 Jam",
             "total_bayar": "205.000",
-            "is_member": false
-        },
-        {
-            "no_resi": "P-MB04.55-S 2323 PPP",
-            "no_kendaraan": "S 2323 PPP",
-            "jenis_kendaraan": "Mobil",
-            "waktu_masuk": "04:55",
-            "waktu_keluar": "3:24",
-            "tanggal_keluar": "2026-01-14",
-            "durasi": "23 Jam",
-            "total_bayar": "115.000",
             "is_member": false
         }
     ],

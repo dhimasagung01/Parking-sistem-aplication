@@ -150,8 +150,7 @@
                                 '{{ item.no_resi }}',
                                 '{{ item.no_kendaraan }}',
                                 '{{ item.jenis_kendaraan }}',
-                                '{{ item.waktu_masuk }}',
-                                '{{ item.waktu_keluar }}',
+                                '{{ item.tanggal_keluar}}',
                                 '{{ item.durasi }}',
                                 '{{ item.total_bayar }}',
                                 '{% if item.is_member %}Member{% else %}Reguler{% endif %}'
@@ -179,7 +178,7 @@
         <div style="text-align: center; border-bottom: 2px dashed #334155; padding-bottom: 15px; margin-bottom: 20px;">
             <i class='bx bxs-car-garage' style="font-size: 3rem; color: var(--accent); margin-bottom: 10px;"></i>
             <h3 style="color: white; font-family: monospace; letter-spacing: 1px; margin-bottom: 5px;">BUKTI TRANSAKSI</h3>
-            <p style="color: #94a3b8; font-size: 0.8rem;">ParkEase Management System</p>
+            <p style="color: #94a3b8; font-size: 0.8rem;">Parking Management System</p>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
@@ -201,14 +200,9 @@
             </div>
             
             <div style="border-top: 1px solid #334155; margin: 5px 0;"></div>
-
             <div class="detail-row">
-                <span style="color: #94a3b8;">Masuk</span>
-                <span id="dMasuk" style="color: white;"></span>
-            </div>
-            <div class="detail-row">
-                <span style="color: #94a3b8;">Keluar</span>
-                <span id="dKeluar" style="color: white;"></span>
+                <span style="color: #94a3b8;">Tanggal Keluar</span>
+                <span id="tKeluar" style="color: white;"></span>
             </div>
             <div class="detail-row">
                 <span style="color: #94a3b8;">Durasi</span>
@@ -230,13 +224,12 @@
 </div>
 
 <script>
-function openDetailModal(resi, nopol, jenis, masuk, keluar, durasi, total, status) {
+function openDetailModal(resi, nopol, jenis, keluar, durasi, total, status) {
         // Isi data ke elemen HTML
         document.getElementById('dResi').textContent = resi;
         document.getElementById('dNopol').textContent = nopol;
         document.getElementById('dJenis').textContent = jenis;
-        document.getElementById('dMasuk').textContent = masuk;
-        document.getElementById('dKeluar').textContent = keluar;
+        document.getElementById('tKeluar').textContent = keluar;
         document.getElementById('dDurasi').textContent = durasi;
         document.getElementById('dTotal').textContent = 'Rp ' + total;
         
